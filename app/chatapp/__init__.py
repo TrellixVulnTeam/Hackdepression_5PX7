@@ -44,6 +44,10 @@ def home():
 def chatbot():
     return render_template("botpage.html")
 
+@app.route("/confessions")
+def confessions():
+    return render_template("confession.html")
+
 
 @app.route("/get")
 def get_bot_response():
