@@ -1,31 +1,18 @@
 <!DOCTYPE html>
-<html>
-<head>
-	<title>MentAbility</title>
-	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.min.css" integrity="sha512-8bHTC73gkZ7rZ7vpqUQThUDhqcNFyYi2xgDgPDHc+GXVGHXq+xPjynxIopALmOPqzo9JZj0k6OqqewdGO3EsrQ==" crossorigin="anonymous" />
-	<link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='styles/index.css') }}">
-</head>
-<body>
-	<div class="header">
-		<h1>MentAbility</h1>
-	</div>
+{% extends "base.html" %}
 
-	<div class="frontGraphics">
-		<img src="src/frontPage.png" class="pic1">
-		<img src="src/SignUpNow.png" class="pic2">
-	</div>
+{% block title %}Blog entries{% endblock %}
 
-	<div class="decor">	
-		<img src="src/cloud.png" class="cloud1">
-		<img src="src/cloud.png" class="cloud2">
-		<img src="src/cloud.png" class="cloud3">
-		<img src="src/cloud.png" class="cloud4">
-		<img src="src/bot.png" class="bot">
-	</div>
+{% block content_title %}{% if search %}Search "{{ search }}"{% else %}Blog entries{% endif %}{% endblock %}
 
-	<div class="footer">
-		<h2>An anonymous confession platform for students to find communities <br> that encourage a focus on mental health during the COVID-19 Pandemic</h2>
-		<button class="ui blue massive button" onclick="location.href = 'explorePage.html'">Find Your Community</button>
-	</div>
-</body>
-</html>
+{% block content %}
+  {% for entry in object_list %}
+    <h3>
+      <a href="{% if entry.published %}{{ url_for('detail', slug=entry.slug) }}{% else %}{{ url_for('edit', slug=entry.slug) }}{% endif %}">
+        {{ entry.title }}
+      </a>
+    </h3>
+    <p>Created {{ entry.timestamp.strftime('%m/%d/%Y at %G:%I%p') }}</p>
+  {% endfor %}
+  {% include "includes/pagination.html" %}
+{% endblock %}
