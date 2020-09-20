@@ -3,7 +3,7 @@
 <head>
 	<title>MentAbility</title>
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.min.css" integrity="sha512-8bHTC73gkZ7rZ7vpqUQThUDhqcNFyYi2xgDgPDHc+GXVGHXq+xPjynxIopALmOPqzo9JZj0k6OqqewdGO3EsrQ==" crossorigin="anonymous" />
-	<link rel="stylesheet" type="text/css" href="style.css">
+	<link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='styles/index.css') }}">
 </head>
 <body>
 	<div class="header">
@@ -11,16 +11,16 @@
 	</div>
 
 	<div class="frontGraphics">
-		<img src="src/frontPage.png" class="pic1">
-		<img src="src/SignUpNow.png" class="pic2">
+		<img src="{{ url_for('static',filename='src/frontPage.png') }}" class="pic1">
+		<img src="{{ url_for('static',filename='src/SignUpNow.png') }}" class="pic2">
 	</div>
 
 	<div class="decor">	
-		<img src="src/cloud.png" class="cloud1">
-		<img src="src/cloud.png" class="cloud2">
-		<img src="src/cloud.png" class="cloud3">
-		<img src="src/cloud.png" class="cloud4">
-		<img src="src/bot.png" class="bot">
+		<img src="{{ url_for('static',filename='src/cloud.png') }}" class="cloud1">
+		<img src="{{ url_for('static',filename='src/cloud.png') }}" class="cloud2">
+		<img src="{{ url_for('static',filename='src/cloud.png') }}" class="cloud3">
+		<img src="{{ url_for('static',filename='src/cloud.png') }}" class="cloud4">
+		<img src="{{ url_for('static',filename='src/cloud.png') }}" class="bot">
 	</div>
 
 	<div class="footer">
