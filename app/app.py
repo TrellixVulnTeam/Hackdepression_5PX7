@@ -94,10 +94,6 @@ class Entry(flask_db.Model):
                 FTSEntry.docid: self.id,
                 FTSEntry.content: content}).execute()
 
-    @app.route("/")
-    def frontPage():
-        return render_template("index.html")
-
     @classmethod
     def public(cls):
         return Entry.select().where(Entry.published == True)
