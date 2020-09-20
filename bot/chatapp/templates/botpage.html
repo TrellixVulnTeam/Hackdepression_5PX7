@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" type="text/css" href="/static/botstyle.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+</head>
+<body>
+    <h1>Welcome to the MentAbility Chatbot!</h1>
+    <p class="desc">Try saying something, like 'nice to meet you!', or 'i don't feel good today'.</p>
+    <p class="desc">If I get stuck, try changing the subject or resetting me (might take a few secs!).</p>
+    <p class="desc">I'm not perfect, but I'll do my best!!</p>
+    <div>
+        <div id="chatbox">
+        <p class="botText"><span>what's up!! it's nice to see you!</span></p>
+        </div>
+        <div id="userInput">
+        <input id="textInput" type="text" name="msg" placeholder="Type here...">
+        <input id="buttonInput" type="submit" value="Send (Enter)">
+        <form>
+            <a href=# id=resetInput><button class='btn btn-default'>Reset Me</button></a>
+        </form>
+        </div>
+
+        <script>
+            function getBotResponse() {
+                var rawText = $("#textInput").val();
+                var userHtml = '<p class="userText"><span>' + rawText + '</span></p>';
+                $("#textInput").val("");
+                $("#chatbox").append(userHtml);
+                document.getElementById('userInput').scrollIntoView({block: 'start', behavior: 'smooth'});
+                $.get("/get", { msg: rawText }).done(function(data) {
+                    var botHtml = '<p class="botText"><span>' + data + '</span></p>';
+                    $("#chatbox").append(botHtml);
+                    document.getElementById('userInput').scrollIntoView({block: 'start', behavior: 'smooth'});
+                });
+            }
+            $(function() {
+                $('a#resetInput').bind('click', function() {
+                    $.getJSON('/resetme', function(data) {
+                        //do nothing
+                    });
+                    setTimeout(function() {
+                        window.location.reload(1);
+                        return false;
+                    }, 3000);
+                });
+            });
+            $("#textInput").keypress(function(e) {
+                if((e.keycode || e.which) == 13) {
+                getBotResponse();
+            }});
+            $("#buttonInput").click(function() {
+                getBotResponse();
+            })
+        </script>
+    </div>
+</body>
+</html>
